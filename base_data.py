@@ -1,3 +1,5 @@
+### базовые компоненты для автотестов
+
 from selenium.webdriver.common.by import By
 from urllib.parse import urlparse
 
@@ -33,3 +35,28 @@ class AuthForm(BaseForm):
         self.mailru_btn = driver.find_element(By.ID, 'oidc_mail')
         self.google_btn = driver.find_element(By.ID, 'oidc_google')
         self.ya_btn = driver.find_element(By.ID, 'oidc_ya')
+
+    def btn_click(self):
+        self.auth_btn.click()
+
+    def find_element(self, by, location):
+        return self.driver.find_element(by, location)
+
+    def get_current_url(self):
+        url = urlparse(self.driver.current_url)
+        return url.path
+
+
+class CodeForm(BaseForm):
+    def __init__(self, driver, timeout=5):
+        super().__init__(driver, timeout)
+        url = 'https://b2c.passport.rt.ru/auth/realms/b2c/protocol/openid-connect/auth?client_id=lk_smarthome'\
+              '&response_type=code&scope=openid&redirect_uri=https%3A%2F%2Flk.smarthome.rt.ru%2Foauth2%2Fcallback'
+
+        driver.get(url)
+
+        self.address = driver.find_element(By.ID, "address")
+        self.code_btn = driver.find_element(By.ID, "otp_get_code")
+
+    def get_click(self):
+        self.code_btn.click()
