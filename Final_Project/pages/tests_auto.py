@@ -45,7 +45,7 @@ def test_auth_by_phonenumber_positive(selenium):
 
 
 def test_auth_by_phonenumber_negative(selenium):
-    # Проверка авторизации на сайте ЛК Ростелеком с невалидным email/паролем 
+    # EXP-005 Проверка авторизации на сайте ЛК Ростелеком с невалидным email/паролем 
     page = AuthPage(selenium)
     page.enter_username(AuthEmail.email)
     page.enter_pass(InvalidData.password)
@@ -56,18 +56,7 @@ def test_auth_by_phonenumber_negative(selenium):
 
 
 def test_auth_by_login_negative(selenium):
-    # Авторизация пользователя с невалидным сочетанием логин/пароль
-    page = AuthPage(selenium)
-    page.enter_username(InvalidData.login)
-    page.enter_pass(InvalidData.password)
-    page.btn_click()
-
-    assert page.get_relative_link() != '/account_b2c/page'
-    assert page.find_el('xpath', '//*[@id="page-right"]/div/div/p').text == 'Неверный логин или пароль'
-
-
-def test_auth_by_login_positive(selenium):
-    # Авторизация пользователя с валидным сочетанием логин/пароль
+    # EXP-006 - Проверка авторизации на сайте ЛК Ростелеком с валидным логин/паролем 
     page = AuthPage(selenium)
     page.enter_username(AuthLogin.login)
     page.enter_pass(AuthLogin.password)
@@ -77,7 +66,7 @@ def test_auth_by_login_positive(selenium):
 
 
 def test_auth_by_login_symbol_negative(selenium):
-    # Авторизация пользователя с использованием спецсимволов в поле ввода логин/пароль
+    # EXP-007 - Проверка авторизации на сайте ЛК Ростелеком с невалидным логин/паролем 
     page = AuthPage(selenium)
     page.enter_username(SymbolData.login)
     page.enter_pass(SymbolData.password)
@@ -88,7 +77,7 @@ def test_auth_by_login_symbol_negative(selenium):
 
 
 def test_auth_by_login_kirill_negative(selenium):
-    # Авторизация пользователя с использованием кириллицы в поле ввода логин/пароль
+    # EXP-008 Авторизация пользователя с использованием кириллицы в поле ввода логин/пароль
     page = AuthPage(selenium)
     page.enter_username(KirillData.login)
     page.enter_pass(KirillData.password)
@@ -99,7 +88,7 @@ def test_auth_by_login_kirill_negative(selenium):
 
 
 def test_auth_with_maxlens_negative(selenium):
-    # Проверка ввода в поля логина и пароля строки длиной >2500 символов
+    # EXP-009 - Проверка ввода в поля логина и пароля строки длиной >2500 символов
     page = AuthPage(selenium)
     page.enter_username(BIGData.login * 500)
     page.enter_pass(BIGData.password * 500)
@@ -109,7 +98,7 @@ def test_auth_with_maxlens_negative(selenium):
 
 
 def test_forget_password(selenium):
-    # Проверка перехода по ссылке "Забыл пароль"
+    # EXP-010 - Проверка перехода по ссылке "Забыл пароль"
     page = AuthPage(selenium)
     page.forget_password_link.click()
 
@@ -117,7 +106,7 @@ def test_forget_password(selenium):
 
 
 def test_registration(selenium):
-    # Проверка перехода по ссылке "Зарегистрироваться"
+    # EXP-011 - Проверка перехода по ссылке "Зарегистрироваться"
     page = AuthPage(selenium)
     page.registration_link.click()
 
@@ -125,7 +114,7 @@ def test_registration(selenium):
 
 
 def test_chat_viber(selenium):
-    # Открытие чата в Viber
+    # EXP-012 - Открытие чата в Viber
     page = AuthPage(selenium)
     chat_vb = page.find_el(*widget_bar)
     original_window = page.driver.current_window_handle
@@ -141,7 +130,7 @@ def test_chat_viber(selenium):
 
 
 def test_chat_telegram(selenium):
-    # Открытие чата в Telegram
+    # EXP-013 - Открытие чата в Telegram
     page = AuthPage(selenium)
     chat_tg = page.find_el(*widget_bar)
     original_window = page.driver.current_window_handle
@@ -157,7 +146,7 @@ def test_chat_telegram(selenium):
 
 
 def test_auth_vk(selenium):
-    # Проверка перехода по ссылке авторизации пользователя через VK
+    # EXP-014 - Проверка перехода по ссылке авторизации пользователя через VK
     page = AuthPage(selenium)
     page.vk_button.click()
 
@@ -165,7 +154,7 @@ def test_auth_vk(selenium):
 
 
 def test_auth_ok(selenium):
-    # Проверка перехода по ссылке авторизации пользователя через сайт одноклассники
+    # EXP-015 - Проверка перехода по ссылке авторизации пользователя через сайт одноклассники
     page = AuthPage(selenium)
     page.ok_button.click()
 
@@ -173,7 +162,7 @@ def test_auth_ok(selenium):
 
 
 def test_auth_moymir(selenium):
-    # Проверка перехода по ссылке авторизации пользователя через сайт Мой мир
+    # EXP-016 - Проверка перехода по ссылке авторизации пользователя через сайт Мой мир
     page = AuthPage(selenium)
     page.mailru_button.click()
 
@@ -181,7 +170,7 @@ def test_auth_moymir(selenium):
 
 
 def test_auth_google(selenium):
-    # Проверка перехода по ссылке авторизации пользователя через Google
+    # EXP-017 - Проверка перехода по ссылке авторизации пользователя через Google
     page = AuthPage(selenium)
     page.google_button.click()
 
@@ -189,7 +178,7 @@ def test_auth_google(selenium):
 
 
 def test_auth_yandex(selenium):
-    # Проверка перехода по ссылке авторизации пользователя через Yandex
+    # EXP-018 - Проверка перехода по ссылке авторизации пользователя через Yandex
     page = AuthPage(selenium)
     page.ya_button.click()
 
